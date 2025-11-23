@@ -9,7 +9,7 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 //      alert dene k liye   //
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
+// const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 //      password authentication k liye      //
 const passport = require("passport");
@@ -48,22 +48,22 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 
-const store = MongoStore.create({
-    mongoUrl: dbUrl,
-    crypto:{
-        secret: process.env.SECRET,
-    },
-    touchAfter: 24*3600,
-});
+// const store = MongoStore.create({
+//     mongoUrl: dbUrl,
+//     crypto:{
+//         secret: process.env.SECRET,
+//     },
+//     touchAfter: 24*3600,
+// });
 
 
-store.on("error", ()=>{
-    console.log("ERROR in MONGO SESSION STORM")
-})
+// store.on("error", ()=>{
+//     console.log("ERROR in MONGO SESSION STORM")
+// })
 
 
 const sessionOptions = {
-    store,
+    // store,
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
@@ -123,3 +123,4 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
     console.log("server is listening to port 8080");
 });
+
